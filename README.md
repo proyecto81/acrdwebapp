@@ -1,53 +1,309 @@
-# CakePHP Application Skeleton
+# Web App Acreditaciones - Turismo Nacional
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=5.x)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+Aplicación web móvil en CakePHP para la gestión de acreditaciones del campeonato de Turismo Nacional.
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 5.x.
+## Características
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+- **Mobile-First Design**: Optimizado para dispositivos móviles desde 320px
+- **PWA (Progressive Web App)**: Funcionalidad offline y instalable
+- **Autenticación JWT**: Sistema seguro de autenticación
+- **Códigos QR**: Generación y gestión de códigos QR de acreditación
+- **Gestión de Equipos**: Información de equipos y miembros
+- **Historial**: Seguimiento de participaciones y estadísticas
+- **Promociones**: Sistema de promociones personalizadas
+- **Modo Offline**: Funcionalidad limitada sin conexión
 
-## Installation
+## Stack Tecnológico
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+- **Backend**: CakePHP 5
+- **Frontend**: HTML5, CSS3, JavaScript ES6+
+- **Base de Datos**: MySQL
+- **Autenticación**: JWT tokens
+- **PWA**: Service Workers, Web App Manifest
+- **Diseño**: Mobile-first, responsive
 
-If Composer is installed globally, run
+## Instalación
 
-```bash
-composer create-project --prefer-dist cakephp/app
+### Requisitos
+
+- PHP 8.1 o superior
+- MySQL 5.7 o superior
+- Composer
+- Servidor web (Apache/Nginx)
+
+### Pasos de Instalación
+
+1. **Clonar el repositorio**
+   ```bash
+   git clone <repository-url>
+   cd acreditaciones_webapp
+   ```
+
+2. **Instalar dependencias**
+   ```bash
+   composer install
+   ```
+
+3. **Configurar la base de datos**
+   - Crear base de datos MySQL
+   - Copiar `config/app_local.php.example` a `config/app_local.php`
+   - Configurar credenciales de base de datos
+
+4. **Configurar variables de entorno**
+   ```bash
+   cp .env.example .env
+   # Editar .env con tus configuraciones
+   ```
+
+5. **Configurar permisos**
+   ```bash
+   chmod -R 755 tmp/
+   chmod -R 755 logs/
+   ```
+
+6. **Configurar servidor web**
+   - Apuntar document root a `webroot/`
+   - Configurar URL rewriting para CakePHP
+
+## Configuración
+
+### API Configuration
+
+Configurar en `config/app_local.php`:
+
+```php
+'Api' => [
+    'baseUrl' => 'https://api.turismonacional.com/api/v1',
+    'timeout' => 30,
+    'jwt' => [
+        'secret' => 'your-jwt-secret',
+        'algorithm' => 'HS256',
+        'expiration' => 3600,
+    ],
+],
 ```
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
+### PWA Configuration
 
-```bash
-composer create-project --prefer-dist cakephp/app myapp
+El archivo `webroot/manifest.json` contiene la configuración PWA:
+
+- Nombre de la aplicación
+- Iconos en diferentes tamaños
+- Colores del tema
+- Modo de visualización
+- Accesos directos
+
+## Estructura del Proyecto
+
+```
+webapp_acreditaciones/
+├── config/                 # Configuración de la aplicación
+├── src/
+│   ├── Controller/         # Controladores
+│   ├── Service/           # Servicios de negocio
+│   └── Model/             # Modelos de datos
+├── templates/             # Vistas y plantillas
+│   ├── layout/           # Layouts principales
+│   ├── element/          # Elementos reutilizables
+│   ├── Auth/             # Vistas de autenticación
+│   ├── Dashboard/        # Vistas del dashboard
+│   ├── Profile/          # Vistas de perfil
+│   ├── Team/             # Vistas de equipo
+│   ├── History/          # Vistas de historial
+│   └── Promotions/       # Vistas de promociones
+├── webroot/              # Archivos públicos
+│   ├── css/              # Estilos CSS
+│   ├── js/               # JavaScript
+│   ├── img/              # Imágenes
+│   ├── manifest.json     # PWA manifest
+│   └── sw.js            # Service Worker
+└── tests/                # Pruebas unitarias
 ```
 
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
+## Funcionalidades
 
-```bash
-bin/cake server -p 8765
+### Autenticación
+
+- Login con DNI y contraseña
+- Validación de email para nuevos usuarios
+- Recuperación de contraseña
+- Gestión de sesiones JWT
+
+### Dashboard
+
+- Estado actual de acreditación
+- Acceso rápido al código QR
+- Promociones destacadas
+- Información del usuario
+
+### Código QR
+
+- Generación automática de códigos QR
+- Datos del usuario y equipo
+- Guardado en galería
+- Compartir código QR
+
+### Gestión de Equipos
+
+- Información del líder del equipo
+- Lista de miembros permanentes
+- Estados de acreditación
+- Estadísticas del equipo
+
+### Historial
+
+- Participaciones en carreras
+- Estadísticas de asistencia
+- Filtros por año y circuito
+- Datos de rendimiento
+
+### Promociones
+
+- Ofertas especiales
+- Descuentos exclusivos
+- Beneficios para miembros
+- Notificaciones de nuevas promociones
+
+## API Endpoints
+
+La aplicación consume los siguientes endpoints:
+
+```
+POST /api/v1/auth/login
+POST /api/v1/auth/validate-email
+POST /api/v1/auth/recover-password
+GET  /api/v1/user/profile
+GET  /api/v1/user/status
+GET  /api/v1/user/qr
+GET  /api/v1/user/team
+GET  /api/v1/user/history
+GET  /api/v1/user/promotions
 ```
 
-Then visit `http://localhost:8765` to see the welcome page.
+## PWA Features
 
-## Update
+### Service Worker
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
+- Cache de archivos estáticos
+- Cache de respuestas API
+- Funcionalidad offline
+- Background sync
+- Push notifications
 
-## Configuration
+### Offline Functionality
 
-Read and edit the environment specific `config/app_local.php` and set up the
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
+- Cache de datos críticos
+- Cola de acciones offline
+- Sincronización automática
+- Indicadores de estado
 
-## Layout
+### Installable
 
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+- Manifest.json configurado
+- Iconos en múltiples tamaños
+- Accesos directos
+- Modo standalone
+
+## Desarrollo
+
+### Estructura de Controladores
+
+```php
+class DashboardController extends AppController
+{
+    public function index(): void
+    {
+        // Lógica del dashboard
+    }
+    
+    public function apiStatus(): Response
+    {
+        // Endpoint API para estado
+    }
+}
+```
+
+### Servicios
+
+```php
+class ApiService
+{
+    public function makeRequest(string $method, string $endpoint, array $data = []): array
+    {
+        // Comunicación con API principal
+    }
+}
+```
+
+### Templates
+
+```php
+// templates/Dashboard/index.php
+<?php $this->assign('title', 'Dashboard'); ?>
+<div class="dashboard-container">
+    <!-- Contenido del dashboard -->
+</div>
+```
+
+## Testing
+
+```bash
+# Ejecutar pruebas unitarias
+vendor/bin/phpunit
+
+# Ejecutar pruebas con coverage
+vendor/bin/phpunit --coverage-html coverage/
+```
+
+## Deployment
+
+### Producción
+
+1. Configurar `debug = false` en `config/app_local.php`
+2. Configurar base de datos de producción
+3. Configurar variables de entorno
+4. Optimizar assets
+5. Configurar SSL/HTTPS
+6. Configurar cache de producción
+
+### Docker
+
+```dockerfile
+FROM php:8.1-apache
+COPY . /var/www/html/
+RUN composer install --no-dev --optimize-autoloader
+```
+
+## Contribución
+
+1. Fork el proyecto
+2. Crear rama para feature (`git checkout -b feature/nueva-funcionalidad`)
+3. Commit cambios (`git commit -am 'Agregar nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Crear Pull Request
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
+
+## Soporte
+
+Para soporte técnico o preguntas:
+
+- Email: soporte@turismonacional.com
+- Documentación: [docs.turismonacional.com](https://docs.turismonacional.com)
+- Issues: [GitHub Issues](https://github.com/turismonacional/acreditaciones-webapp/issues)
+
+## Changelog
+
+### v1.0.0
+- Lanzamiento inicial
+- Autenticación JWT
+- Dashboard principal
+- Gestión de códigos QR
+- PWA básica
+- Funcionalidad offline
+
+---
+
+**Desarrollado para Turismo Nacional** 🏁

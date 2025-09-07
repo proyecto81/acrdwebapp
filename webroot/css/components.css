@@ -1,0 +1,1007 @@
+/* Authentication Components */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f5f5f5, #e9ecef);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-logo {
+    margin-bottom: 2rem;
+}
+
+.logo-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #007AFF, #0056CC);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    margin: 0 auto 1rem;
+    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.3);
+}
+
+.auth-logo h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.auth-logo p {
+    color: #666;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.auth-form {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.auth-link {
+    color: #007AFF;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard Components */
+.dashboard-container {
+    max-width: 100%;
+}
+
+.status-section {
+    margin-bottom: 2rem;
+}
+
+.status-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid;
+}
+
+.status-card.active {
+    border-left-color: #28a745;
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+}
+
+.status-card.pending {
+    border-left-color: #ffc107;
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+}
+
+.status-card.inactive {
+    border-left-color: #dc3545;
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+}
+
+.status-content {
+    text-align: center;
+}
+
+.next-event {
+    margin-top: 0.5rem;
+    color: #666;
+}
+
+.quick-actions {
+    margin-bottom: 2rem;
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.action-btn {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-btn.primary {
+    border-color: #007AFF;
+    background: linear-gradient(135deg, #007AFF, #0056CC);
+    color: white;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.action-icon {
+    font-size: 2rem;
+}
+
+.action-label {
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.promotions-section {
+    margin-bottom: 2rem;
+}
+
+.promotions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.view-all {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.user-info-section {
+    margin-bottom: 2rem;
+}
+
+.user-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-avatar {
+    flex-shrink: 0;
+}
+
+.avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #007AFF, #0056CC);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.user-details h3 {
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+.user-details p {
+    margin-bottom: 0.25rem;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+/* QR Components */
+.qr-container {
+    max-width: 100%;
+    text-align: center;
+}
+
+.qr-display {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.qr-code {
+    margin-bottom: 1.5rem;
+}
+
+.qr-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.qr-info {
+    margin-bottom: 1.5rem;
+}
+
+.qr-info h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.qr-info p {
+    margin-bottom: 0.25rem;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.qr-status {
+    margin-bottom: 1.5rem;
+}
+
+.event-info {
+    margin-top: 0.5rem;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.qr-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.qr-instructions {
+    background: #f8f9fa;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.qr-instructions h4 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.qr-instructions ul {
+    list-style: none;
+    padding: 0;
+}
+
+.qr-instructions li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #666;
+}
+
+.qr-instructions li::before {
+    content: "•";
+    color: #007AFF;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.qr-error {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.error-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.qr-error h3 {
+    margin-bottom: 1rem;
+    color: #dc3545;
+}
+
+.qr-error p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+/* Profile Components */
+.profile-container {
+    max-width: 100%;
+}
+
+.profile-header {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-avatar {
+    margin-bottom: 1rem;
+}
+
+.profile-avatar .avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    margin: 0 auto;
+}
+
+.profile-info h2 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.profile-info p {
+    color: #666;
+    margin: 0;
+}
+
+.profile-sections {
+    margin-bottom: 2rem;
+}
+
+.profile-section {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.info-value {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.info-action {
+    color: #007AFF;
+    text-decoration: none;
+    font-size: 1.25rem;
+}
+
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Profile Edit Components */
+.profile-edit-container {
+    max-width: 100%;
+}
+
+.edit-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.edit-header h2 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.edit-header p {
+    color: #666;
+    margin: 0;
+}
+
+.edit-form {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox-text {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+/* Password Change Components */
+.change-password-container {
+    max-width: 100%;
+}
+
+.change-password-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.change-password-header h2 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.change-password-header p {
+    color: #666;
+    margin: 0;
+}
+
+.change-password-form {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.password-strength {
+    margin-top: 0.5rem;
+}
+
+.strength-bar {
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.strength-text {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.password-match {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.password-match.match {
+    color: #28a745;
+}
+
+.password-match.no-match {
+    color: #dc3545;
+}
+
+.password-requirements {
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.password-requirements h4 {
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-size: 0.875rem;
+}
+
+.password-requirements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.password-requirements li {
+    padding: 0.25rem 0;
+    font-size: 0.75rem;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.password-requirements li.met {
+    color: #28a745;
+}
+
+.password-requirements li::before {
+    content: "✗";
+    margin-right: 0.5rem;
+    color: #dc3545;
+}
+
+.password-requirements li.met::before {
+    content: "✓";
+    color: #28a745;
+}
+
+/* Team Components */
+.team-container {
+    max-width: 100%;
+}
+
+.team-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.team-header h2 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.team-header p {
+    color: #666;
+    margin: 0;
+}
+
+.team-section {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.team-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.leader-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 0.75rem;
+    border: 2px solid #007AFF;
+}
+
+.member-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #e0e0e0;
+}
+
+.member-avatar {
+    flex-shrink: 0;
+}
+
+.member-avatar .avatar-placeholder {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+}
+
+.member-info {
+    flex: 1;
+}
+
+.member-info h4 {
+    margin-bottom: 0.25rem;
+    color: #333;
+    font-size: 1rem;
+}
+
+.member-info p {
+    margin-bottom: 0.25rem;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.member-status {
+    flex-shrink: 0;
+}
+
+.members-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.no-members {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.no-members-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.team-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 0.75rem;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #007AFF;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* History Components */
+.history-container {
+    max-width: 100%;
+}
+
+.history-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.history-header h2 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.history-header p {
+    color: #666;
+    margin: 0;
+}
+
+.statistics-section {
+    margin-bottom: 2rem;
+}
+
+.statistics-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.history-section {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.history-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.history-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.race-info {
+    flex: 1;
+}
+
+.race-info h4 {
+    margin-bottom: 0.25rem;
+    color: #333;
+    font-size: 1rem;
+}
+
+.race-date {
+    color: #666;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.race-location {
+    color: #666;
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.race-status {
+    flex-shrink: 0;
+}
+
+.race-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.race-position,
+.race-points {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+}
+
+.position-label,
+.points-label {
+    color: #666;
+}
+
+.position-value,
+.points-value {
+    color: #333;
+    font-weight: 500;
+}
+
+.no-history {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.no-history-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.history-actions {
+    margin-top: 2rem;
+}
+
+/* Promotions Components */
+.promotions-container {
+    max-width: 100%;
+}
+
+.promotions-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.promotions-header h2 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.promotions-header p {
+    color: #666;
+    margin: 0;
+}
+
+.promotion-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+}
+
+.promotion-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.promotion-card.discount {
+    border-left-color: #28a745;
+}
+
+.promotion-card.benefit {
+    border-left-color: #007AFF;
+}
+
+.promotion-card.special {
+    border-left-color: #ffc107;
+}
+
+.promotion-card.inactive {
+    opacity: 0.6;
+    border-left-color: #6c757d;
+}
+
+.promotion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.promotion-title {
+    margin: 0;
+    color: #333;
+    font-size: 1.125rem;
+}
+
+.promotion-discount {
+    background: #007AFF;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.promotion-content {
+    margin-bottom: 1rem;
+}
+
+.promotion-description {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.promotion-validity {
+    color: #999;
+    font-size: 0.75rem;
+}
+
+.promotion-action {
+    text-align: right;
+}
+
+.promotion-action .btn.applied {
+    background: #28a745;
+    color: white;
+}
+
+.no-promotions {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.no-promotions-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.promotions-actions {
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 320px) {
+    .auth-form {
+        padding: 1.5rem;
+    }
+    
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .team-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .action-buttons {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .team-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .qr-actions {
+        flex-direction: row;
+    }
+    
+    .profile-actions {
+        flex-direction: row;
+    }
+    
+    .form-actions {
+        flex-direction: row;
+    }
+}

@@ -1,52 +1,64 @@
 <?php
 declare(strict_types=1);
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link      https://cakephp.org CakePHP(tm) Project
- * @since     0.2.9
- * @license   https://opensource.org/licenses/mit-license.php MIT License
- */
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
+use App\Service\AuthService;
+use App\Service\ApiService;
 
-/**
- * Application Controller
- *
- * Add your application-wide methods in the class below, your controllers
- * will inherit them.
- *
- * @link https://book.cakephp.org/5/en/controllers.html#the-app-controller
- */
 class AppController extends Controller
 {
-    /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading components.
-     *
-     * e.g. `$this->loadComponent('FormProtection');`
-     *
-     * @return void
-     */
+    protected AuthService $authService;
+    protected ApiService $apiService;
+
     public function initialize(): void
     {
         parent::initialize();
 
+        $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
-        /*
-         * Enable the following component for recommended CakePHP form protection settings.
-         * see https://book.cakephp.org/5/en/controllers/components/form-protection.html
-         */
-        //$this->loadComponent('FormProtection');
+        $this->apiService = new ApiService();
+        $this->authService = new AuthService($this->apiService);
+
+        // Set default layout
+        $this->viewBuilder()->setLayout('app');
+    }
+
+    public function beforeFilter(EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        // Check authentication for protected routes
+        $publicActions = ['login', 'validateEmail', 'recoverPassword'];
+        $currentAction = $this->request->getParam('action');
+        $currentController = $this->request->getParam('controller');
+
+        if ($currentController === 'Auth' && in_array($currentAction, $publicActions)) {
+            return; // Allow access to auth pages
+        }
+
+        if (!$this->authService->isAuthenticated()) {
+            $this->Flash->error('Debe iniciar sesión para acceder a esta página');
+            return $this->redirect('/login');
+        }
+
+        // Set user data for all views
+        $user = $this->authService->getUser();
+        $this->set('currentUser', $user);
+    }
+
+    public function beforeRender(EventInterface $event)
+    {
+        parent::beforeRender($event);
+
+        // Set common view variables
+        $this->set('isAuthenticated', $this->authService->isAuthenticated());
+        
+        if ($this->authService->isAuthenticated()) {
+            $this->set('currentUser', $this->authService->getUser());
+        }
     }
 }

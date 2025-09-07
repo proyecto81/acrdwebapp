@@ -5,7 +5,6 @@
 #/logs/*
 #/tmp/*
 #/vendor/*
-WEBAPP/*
 
 # https://github.com/proyecto81/acrdwebapp.git
 

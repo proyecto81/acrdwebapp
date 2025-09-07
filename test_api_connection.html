@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Conexión API - Acreditaciones TN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 0.5rem;
+        }
+        
+        .test-section h2 {
+            color: #007AFF;
+            margin-bottom: 1rem;
+        }
+        
+        .test-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        label {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        input, button {
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #007AFF;
+        }
+        
+        button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        button:hover {
+            background: #0056CC;
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .result.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .result.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .result.info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .endpoint-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .endpoint-list li {
+            padding: 0.5rem;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .endpoint-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .endpoint-method {
+            background: #007AFF;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 1rem;
+        }
+        
+        .endpoint-method.post {
+            background: #28a745;
+        }
+        
+        .endpoint-method.get {
+            background: #007AFF;
+        }
+        
+        .test-all-btn {
+            background: #28a745;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .test-all-btn:hover {
+            background: #218838;
+        }
+        
+        .api-info {
+            background: #e9ecef;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .api-info h3 {
+            color: #495057;
+            margin-bottom: 0.5rem;
+        }
+        
+        .api-info p {
+            color: #6c757d;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔗 Test de Conexión API - Acreditaciones TN</h1>
+        
+        <div class="api-info">
+            <h3>📋 Información de la API</h3>
+            <p><strong>URL Base:</strong> http://localhost/acreditacionestn2025/api/v1/</p>
+            <p><strong>WebApp:</strong> http://localhost/acrdwebapp/</p>
+        </div>
+        
+        <!-- Test de Conectividad Básica -->
+        <div class="test-section">
+            <h2>📡 Conectividad Básica</h2>
+            <p>Verifica que la API esté respondiendo correctamente.</p>
+            <button onclick="testBasicConnectivity()">Probar Conectividad</button>
+            <div id="connectivity-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <!-- Test de Login -->
+        <div class="test-section">
+            <h2>🔐 Test de Login</h2>
+            <p>Prueba el endpoint de autenticación con credenciales de prueba.</p>
+            <div class="test-form">
+                <div class="form-group">
+                    <label for="test-dni">DNI de Prueba:</label>
+                    <input type="text" id="test-dni" placeholder="12345678" value="12345678">
+                </div>
+                <div class="form-group">
+                    <label for="test-password">Contraseña de Prueba:</label>
+                    <input type="password" id="test-password" placeholder="password123" value="password123">
+                </div>
+                <button onclick="testLogin()">Probar Login</button>
+            </div>
+            <div id="login-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <!-- Test de Endpoints Públicos -->
+        <div class="test-section">
+            <h2>🌐 Endpoints Públicos</h2>
+            <p>Prueba endpoints que no requieren autenticación.</p>
+            <ul class="endpoint-list">
+                <li>
+                    <div>
+                        <span class="endpoint-method get">GET</span>
+                        <span>/api/v1/promotions/active</span>
+                    </div>
+                    <button onclick="testEndpoint('/promotions/active', 'GET')">Probar</button>
+                </li>
+            </ul>
+            <div id="public-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <!-- Test de Endpoints Protegidos -->
+        <div class="test-section">
+            <h2>🔒 Endpoints Protegidos</h2>
+            <p>Prueba endpoints que requieren autenticación (necesita token válido).</p>
+            <ul class="endpoint-list">
+                <li>
+                    <div>
+                        <span class="endpoint-method get">GET</span>
+                        <span>/api/v1/user/profile</span>
+                    </div>
+                    <button onclick="testProtectedEndpoint('/user/profile', 'GET')">Probar</button>
+                </li>
+                <li>
+                    <div>
+                        <span class="endpoint-method get">GET</span>
+                        <span>/api/v1/user/status</span>
+                    </div>
+                    <button onclick="testProtectedEndpoint('/user/status', 'GET')">Probar</button>
+                </li>
+                <li>
+                    <div>
+                        <span class="endpoint-method get">GET</span>
+                        <span>/api/v1/user/team</span>
+                    </div>
+                    <button onclick="testProtectedEndpoint('/user/team', 'GET')">Probar</button>
+                </li>
+                <li>
+                    <div>
+                        <span class="endpoint-method get">GET</span>
+                        <span>/api/v1/user/history</span>
+                    </div>
+                    <button onclick="testProtectedEndpoint('/user/history', 'GET')">Probar</button>
+                </li>
+            </ul>
+            <div id="protected-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <!-- Test Completo -->
+        <div class="test-section">
+            <h2>🚀 Test Completo</h2>
+            <p>Ejecuta todas las pruebas automáticamente.</p>
+            <button class="test-all-btn" onclick="runAllTests()">Ejecutar Todas las Pruebas</button>
+            <div id="all-tests-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <!-- Información de Debugging -->
+        <div class="test-section">
+            <h2>🔧 Información de Debugging</h2>
+            <p>Información útil para resolver problemas de conexión.</p>
+            <button onclick="showDebugInfo()">Mostrar Info de Debug</button>
+            <div id="debug-result" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost/acreditacionestn2025/api/v1';
+        let authToken = null;
+        
+        // Función para mostrar resultados
+        function showResult(elementId, content, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.className = `result ${type}`;
+            element.textContent = content;
+        }
+        
+        // Test de conectividad básica
+        async function testBasicConnectivity() {
+            showResult('connectivity-result', 'Probando conectividad...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/promotions/active`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    showResult('connectivity-result', 
+                        `✅ Conectividad OK!\n\nStatus: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`, 
+                        'success'
+                    );
+                } else {
+                    showResult('connectivity-result', 
+                        `❌ Error de conectividad\n\nStatus: ${response.status}\nStatus Text: ${response.statusText}`, 
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult('connectivity-result', 
+                    `❌ Error de conexión\n\nError: ${error.message}\n\nVerifica que:\n- La API esté ejecutándose en ${API_BASE_URL}\n- No haya problemas de CORS\n- El servidor web esté funcionando`, 
+                    'error'
+                );
+            }
+        }
+        
+        // Test de login
+        async function testLogin() {
+            const dni = document.getElementById('test-dni').value;
+            const password = document.getElementById('test-password').value;
+            
+            if (!dni || !password) {
+                showResult('login-result', '❌ Por favor completa DNI y contraseña', 'error');
+                return;
+            }
+            
+            showResult('login-result', 'Probando login...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ dni, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    authToken = data.data.token;
+                    localStorage.setItem('test_token', authToken);
+                    showResult('login-result', 
+                        `✅ Login exitoso!\n\nToken: ${authToken.substring(0, 50)}...\n\nUsuario: ${JSON.stringify(data.data.user, null, 2)}`, 
+                        'success'
+                    );
+                } else {
+                    showResult('login-result', 
+                        `❌ Error en login\n\nStatus: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`, 
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult('login-result', 
+                    `❌ Error de conexión en login\n\nError: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+        
+        // Test de endpoint público
+        async function testEndpoint(endpoint, method = 'GET') {
+            showResult('public-result', `Probando ${method} ${endpoint}...`, 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('public-result', 
+                        `✅ ${method} ${endpoint} OK!\n\nStatus: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`, 
+                        'success'
+                    );
+                } else {
+                    showResult('public-result', 
+                        `❌ Error en ${method} ${endpoint}\n\nStatus: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`, 
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult('public-result', 
+                    `❌ Error de conexión en ${method} ${endpoint}\n\nError: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+        
+        // Test de endpoint protegido
+        async function testProtectedEndpoint(endpoint, method = 'GET') {
+            if (!authToken) {
+                // Intentar obtener token del localStorage
+                authToken = localStorage.getItem('test_token');
+                if (!authToken) {
+                    showResult('protected-result', 
+                        '❌ No hay token de autenticación. Primero ejecuta el test de login.', 
+                        'error'
+                    );
+                    return;
+                }
+            }
+            
+            showResult('protected-result', `Probando ${method} ${endpoint} con token...`, 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult('protected-result', 
+                        `✅ ${method} ${endpoint} OK!\n\nStatus: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`, 
+                        'success'
+                    );
+                } else {
+                    showResult('protected-result', 
+                        `❌ Error en ${method} ${endpoint}\n\nStatus: ${response.status}\nResponse: ${JSON.stringify(data, null, 2)}`, 
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult('protected-result', 
+                    `❌ Error de conexión en ${method} ${endpoint}\n\nError: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+        
+        // Ejecutar todas las pruebas
+        async function runAllTests() {
+            showResult('all-tests-result', '🚀 Iniciando test completo...\n\n', 'info');
+            
+            const results = [];
+            
+            // Test 1: Conectividad básica
+            try {
+                const response = await fetch(`${API_BASE_URL}/promotions/active`);
+                if (response.ok) {
+                    results.push('✅ Conectividad básica: OK');
+                } else {
+                    results.push(`❌ Conectividad básica: Error ${response.status}`);
+                }
+            } catch (error) {
+                results.push(`❌ Conectividad básica: ${error.message}`);
+            }
+            
+            // Test 2: Login
+            try {
+                const loginResponse = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ dni: '12345678', password: 'password123' })
+                });
+                
+                const loginData = await loginResponse.json();
+                if (loginResponse.ok && loginData.success) {
+                    authToken = loginData.data.token;
+                    results.push('✅ Login: OK');
+                } else {
+                    results.push(`❌ Login: Error ${loginResponse.status}`);
+                }
+            } catch (error) {
+                results.push(`❌ Login: ${error.message}`);
+            }
+            
+            // Test 3: Endpoints protegidos (si hay token)
+            if (authToken) {
+                const protectedEndpoints = ['/user/profile', '/user/status', '/user/team', '/user/history'];
+                
+                for (const endpoint of protectedEndpoints) {
+                    try {
+                        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                            headers: {
+                                'Authorization': `Bearer ${authToken}`,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            results.push(`✅ ${endpoint}: OK`);
+                        } else {
+                            results.push(`❌ ${endpoint}: Error ${response.status}`);
+                        }
+                    } catch (error) {
+                        results.push(`❌ ${endpoint}: ${error.message}`);
+                    }
+                }
+            }
+            
+            // Mostrar resultados
+            const summary = results.join('\n');
+            const successCount = results.filter(r => r.includes('✅')).length;
+            const totalCount = results.length;
+            
+            showResult('all-tests-result', 
+                `🎯 Test Completo Finalizado\n\n${summary}\n\n📊 Resumen: ${successCount}/${totalCount} pruebas exitosas`, 
+                successCount === totalCount ? 'success' : 'error'
+            );
+        }
+        
+        // Mostrar información de debugging
+        function showDebugInfo() {
+            const debugInfo = `
+🔧 Información de Debugging
+
+📍 URLs:
+- API Base: ${API_BASE_URL}
+- WebApp: ${window.location.origin}
+- User Agent: ${navigator.userAgent}
+
+🌐 Conectividad:
+- Online: ${navigator.onLine ? 'Sí' : 'No'}
+- Protocol: ${window.location.protocol}
+- Host: ${window.location.host}
+
+🔑 Token:
+- Token guardado: ${localStorage.getItem('test_token') ? 'Sí' : 'No'}
+- Token actual: ${authToken ? 'Sí' : 'No'}
+
+📋 Próximos pasos si hay errores:
+1. Verificar que la API esté ejecutándose en http://localhost/acreditacionestn2025/
+2. Comprobar que no haya errores en la consola del navegador
+3. Verificar configuración CORS en la API
+4. Comprobar que el servidor web esté funcionando
+5. Verificar que las rutas de la API estén configuradas correctamente
+
+🔗 URLs para probar manualmente:
+- ${API_BASE_URL}/promotions/active
+- ${API_BASE_URL}/auth/login
+- ${API_BASE_URL}/user/profile (requiere token)
+            `;
+            
+            showResult('debug-result', debugInfo, 'info');
+        }
+        
+        // Cargar token guardado al iniciar
+        window.addEventListener('load', () => {
+            const savedToken = localStorage.getItem('test_token');
+            if (savedToken) {
+                authToken = savedToken;
+                console.log('Token cargado desde localStorage');
+            }
+        });
+    </script>
+</body>
+</html>

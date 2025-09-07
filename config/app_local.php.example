@@ -1,0 +1,38 @@
+<?php
+declare(strict_types=1);
+
+return [
+    'debug' => true,
+    
+    'Security' => [
+        'salt' => 'your-security-salt-here-change-this-in-production',
+    ],
+    
+    'Datasources' => [
+        'default' => [
+            'host' => 'localhost',
+            'username' => 'root',
+            'password' => '',
+            'database' => 'acreditaciones_tn',
+        ],
+    ],
+    
+    'Api' => [
+        'baseUrl' => 'https://api.turismonacional.com/api/v1',
+        'timeout' => 30,
+        'jwt' => [
+            'secret' => 'your-jwt-secret-here-change-this-in-production',
+            'algorithm' => 'HS256',
+            'expiration' => 3600,
+        ],
+    ],
+    
+    'EmailTransport' => [
+        'default' => [
+            'host' => 'localhost',
+            'port' => 587,
+            'username' => null,
+            'password' => null,
+        ],
+    ],
+];
